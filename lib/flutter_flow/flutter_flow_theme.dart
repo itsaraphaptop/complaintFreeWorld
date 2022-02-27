@@ -2,9 +2,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+const kThemeModeKey = '__theme_mode__';
+SharedPreferences _prefs;
 
 abstract class FlutterFlowTheme {
-  static FlutterFlowTheme of(BuildContext context) => LightModeTheme();
+  static Future initialize() async =>
+      _prefs = await SharedPreferences.getInstance();
+  static ThemeMode get themeMode {
+    final darkMode = _prefs?.getBool(kThemeModeKey);
+    return darkMode == null
+        ? ThemeMode.system
+        : darkMode
+            ? ThemeMode.dark
+            : ThemeMode.light;
+  }
+
+  static void saveThemeMode(ThemeMode mode) => mode == ThemeMode.system
+      ? _prefs?.remove(kThemeModeKey)
+      : _prefs?.setBool(kThemeModeKey, mode == ThemeMode.dark);
+
+  static FlutterFlowTheme of(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.dark
+          ? DarkModeTheme()
+          : LightModeTheme();
 
   Color primaryColor;
   Color secondaryColor;
@@ -60,6 +82,17 @@ abstract class FlutterFlowTheme {
 }
 
 class LightModeTheme extends FlutterFlowTheme {
+  Color primaryColor = const Color(0xFF93E4E8);
+  Color secondaryColor = const Color(0xFFEE8B60);
+  Color tertiaryColor = const Color(0xFFFFFFFF);
+  Color alternate = const Color(0x00000000);
+  Color primaryBackground = const Color(0x00000000);
+  Color secondaryBackground = const Color(0x00000000);
+  Color primaryText = const Color(0x00000000);
+  Color secondaryText = const Color(0x00000000);
+}
+
+class DarkModeTheme extends FlutterFlowTheme {
   Color primaryColor = const Color(0xFF93E4E8);
   Color secondaryColor = const Color(0xFFEE8B60);
   Color tertiaryColor = const Color(0xFFFFFFFF);

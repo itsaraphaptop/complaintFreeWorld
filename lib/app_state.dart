@@ -28,11 +28,7 @@ class FFAppState {
 
   String home1 = '';
 
-  String home2 = '';
-
-  String home3 = '';
-
-  String home4 = '';
+  bool darkmode = false;
 }
 
 LatLng _latLngFromString(String val) {

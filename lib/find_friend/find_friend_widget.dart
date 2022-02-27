@@ -238,9 +238,6 @@ class _FindFriendWidgetState extends State<FindFriendWidget> {
                                                       algoliaSearchResults = [])
                                                   .whenComplete(
                                                       () => setState(() {}));
-                                              setState(() =>
-                                                  FFAppState().searchuser =
-                                                      textController.text);
                                             },
                                             child: Icon(
                                               Icons.search_rounded,
@@ -267,8 +264,6 @@ class _FindFriendWidgetState extends State<FindFriendWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                   child: StreamBuilder<List<UserFriendsRecord>>(
                     stream: queryUserFriendsRecord(
-                      queryBuilder: (userFriendsRecord) => userFriendsRecord
-                          .where('Status_Request', isEqualTo: 'pending'),
                       singleRecord: true,
                     ),
                     builder: (context, snapshot) {
@@ -309,7 +304,7 @@ class _FindFriendWidgetState extends State<FindFriendWidget> {
                             );
                           }
                           final users = (algoliaSearchResults?.toList() ?? [])
-                              .take(1)
+                              .take(10)
                               .toList();
                           return ListView.builder(
                             padding: EdgeInsets.zero,

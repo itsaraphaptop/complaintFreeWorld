@@ -205,6 +205,17 @@ class _CalendaselectWidgetState extends State<CalendaselectWidget> {
               onPressed: () async {
                 setState(
                     () => FFAppState().calendar = calendarSelectedDay.start);
+                final usersUpdateData = createUsersRecordData(
+                  dateEndComplaint: calendarSelectedDay.start,
+                );
+                await currentUserReference.update(usersUpdateData);
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        NavBarPage(initialPage: 'complaintgold'),
+                  ),
+                );
               },
               text: 'เลือกวัน',
               options: FFButtonOptions(
@@ -228,26 +239,33 @@ class _CalendaselectWidgetState extends State<CalendaselectWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      final usersUpdateData = createUsersRecordData(
-                        dateEndComplaint: calendarSelectedDay.start,
-                      );
-                      await currentUserReference.update(usersUpdateData);
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'complaintgold'),
-                        ),
-                      );
-                    },
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.black,
-                      size: 24,
+                  if (responsiveVisibility(
+                    context: context,
+                    phone: false,
+                    tablet: false,
+                    tabletLandscape: false,
+                    desktop: false,
+                  ))
+                    InkWell(
+                      onTap: () async {
+                        final usersUpdateData = createUsersRecordData(
+                          dateEndComplaint: calendarSelectedDay.start,
+                        );
+                        await currentUserReference.update(usersUpdateData);
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'complaintgold'),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black,
+                        size: 24,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),

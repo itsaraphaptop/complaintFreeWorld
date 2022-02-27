@@ -117,7 +117,8 @@ class _CalendaPostCopyWidgetState extends State<CalendaPostCopyWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               FlutterFlowCalendar(
-                                color: Color(0xFF2364A7),
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
                                 weekFormat: false,
                                 weekStartsMonday: false,
                                 initialDate: getCurrentTimestamp,
@@ -196,7 +197,8 @@ class _CalendaPostCopyWidgetState extends State<CalendaPostCopyWidget>
                               options: FFButtonOptions(
                                 width: 130,
                                 height: 40,
-                                color: Color(0xFF2364A7),
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .subtitle2
                                     .override(
