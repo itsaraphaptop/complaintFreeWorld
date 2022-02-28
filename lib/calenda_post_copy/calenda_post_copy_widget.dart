@@ -133,15 +133,16 @@ class _CalendaPostCopyWidgetState extends State<CalendaPostCopyWidget>
                                   'Lexend Deca',
                                 ),
                                 dateStyle: GoogleFonts.getFont(
-                                  'Lexend Deca',
+                                  'Kanit',
                                   color: Colors.black,
                                 ),
                                 selectedDateStyle: GoogleFonts.getFont(
-                                  'Lexend Deca',
+                                  'Kanit',
                                   color: Color(0xFF2B343A),
                                 ),
                                 inactiveDateStyle: GoogleFonts.getFont(
                                   'Lexend Deca',
+                                  color: Color(0xFF757575),
                                 ),
                               ).animated([
                                 animationsMap['calendarOnPageLoadAnimation']

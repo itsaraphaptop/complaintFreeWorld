@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HistoryPostWidget extends StatefulWidget {
@@ -182,11 +183,11 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                     ),
                   ),
                   Expanded(
-                    child: StreamBuilder<List<JobPostsRecord>>(
-                      stream: queryJobPostsRecord(
-                        queryBuilder: (jobPostsRecord) => jobPostsRecord
-                            .where('postedBy', isEqualTo: currentUserReference)
-                            .where('likedPost', isEqualTo: true),
+                    child: StreamBuilder<List<ComplaintJobsRecord>>(
+                      stream: queryComplaintJobsRecord(
+                        queryBuilder: (complaintJobsRecord) =>
+                            complaintJobsRecord.where('userComplaint',
+                                isEqualTo: currentUserReference),
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
@@ -202,15 +203,16 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                             ),
                           );
                         }
-                        List<JobPostsRecord> columnJobPostsRecordList =
-                            snapshot.data;
+                        List<ComplaintJobsRecord>
+                            columnComplaintJobsRecordList = snapshot.data;
                         return SingleChildScrollView(
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: List.generate(
-                                columnJobPostsRecordList.length, (columnIndex) {
-                              final columnJobPostsRecord =
-                                  columnJobPostsRecordList[columnIndex];
+                                columnComplaintJobsRecordList.length,
+                                (columnIndex) {
+                              final columnComplaintJobsRecord =
+                                  columnComplaintJobsRecordList[columnIndex];
                               return Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
@@ -226,25 +228,33 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(8, 8, 8, 8),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  child: Image.network(
-                                                    columnJobPostsRecord
-                                                        .photoUrl,
-                                                    width: 74,
-                                                    height: 74,
-                                                    fit: BoxFit.cover,
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10, 0, 0, 0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                if ((columnComplaintJobsRecord
+                                                        .complaintCheck) ==
+                                                    true)
+                                                  FaIcon(
+                                                    FontAwesomeIcons.smile,
+                                                    color: Color(0xFF2364A7),
+                                                    size: 30,
                                                   ),
-                                                ),
-                                              ),
-                                            ],
+                                                if ((columnComplaintJobsRecord
+                                                        .complaintCheck) ==
+                                                    false)
+                                                  FaIcon(
+                                                    FontAwesomeIcons.frown,
+                                                    color: Color(0xFFFF4D00),
+                                                    size: 30,
+                                                  ),
+                                              ],
+                                            ),
                                           ),
                                           Expanded(
                                             child: Padding(
@@ -260,8 +270,8 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                                                         MainAxisSize.max,
                                                     children: [
                                                       Text(
-                                                        columnJobPostsRecord
-                                                            .jobName,
+                                                        columnComplaintJobsRecord
+                                                            .comment,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -282,26 +292,7 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                                                   Row(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
-                                                    children: [
-                                                      Text(
-                                                        columnJobPostsRecord
-                                                            .jobDescription,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Lexend Deca',
-                                                                  color: Color(
-                                                                      0xFF8B97A2),
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                ),
-                                                      ),
-                                                    ],
+                                                    children: [],
                                                   ),
                                                   Row(
                                                     mainAxisSize:
@@ -309,9 +300,9 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                                                     children: [
                                                       Text(
                                                         dateTimeFormat(
-                                                            'MMMMEEEEd',
-                                                            columnJobPostsRecord
-                                                                .timeCreated),
+                                                            'd/M/y',
+                                                            columnComplaintJobsRecord
+                                                                .createComplaint),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -336,18 +327,42 @@ class _HistoryPostWidgetState extends State<HistoryPostWidget> {
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 0, 8, 0),
-                                                  child: Icon(
-                                                    Icons
-                                                        .chevron_right_outlined,
-                                                    color: Color(0xFF95A1AC),
-                                                    size: 24,
+                                              if ((columnComplaintJobsRecord
+                                                      .complaintCheck) ==
+                                                  true)
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 8, 0),
+                                                    child: Icon(
+                                                      Icons.exposure_plus_1,
+                                                      color: Color(0xFF2364A7),
+                                                      size: 24,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
+                                              if ((columnComplaintJobsRecord
+                                                      .complaintCheck) ==
+                                                  false)
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 8, 0),
+                                                  child: Text(
+                                                    '0',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Lexend Deca',
+                                                          color:
+                                                              Color(0xFFFF4D00),
+                                                          fontSize: 20,
+                                                        ),
+                                                  ),
+                                                ),
                                             ],
                                           ),
                                         ],
