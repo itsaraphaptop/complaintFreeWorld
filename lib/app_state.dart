@@ -29,6 +29,8 @@ class FFAppState {
   String home1 = '';
 
   bool darkmode = false;
+
+  DateTime dateSelect;
 }
 
 LatLng _latLngFromString(String val) {

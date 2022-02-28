@@ -366,7 +366,7 @@ class _MemberWidgetState extends State<MemberWidget> {
                                         .where('Recipient_UID',
                                             isEqualTo: currentUserReference)
                                         .where('Status_Request',
-                                            isEqualTo: 'pending'),
+                                            isEqualTo: 'Pending'),
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

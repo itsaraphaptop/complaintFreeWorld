@@ -312,85 +312,80 @@ class _FindFriendWidgetState extends State<FindFriendWidget> {
                             itemCount: users.length,
                             itemBuilder: (context, usersIndex) {
                               final usersItem = users[usersIndex];
-                              return Visibility(
-                                visible: (listViewUserFriendsRecord
-                                        .recipientChoice) ==
-                                    false,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 10),
-                                          child: Container(
-                                            width: 120,
-                                            height: 120,
-                                            clipBehavior: Clip.antiAlias,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Image.network(
-                                              usersItem.photoUrl,
-                                            ),
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 10),
+                                        child: Container(
+                                          width: 120,
+                                          height: 120,
+                                          clipBehavior: Clip.antiAlias,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Image.network(
+                                            usersItem.photoUrl,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 10),
-                                      child: Text(
-                                        usersItem.displayName,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
                                       ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 10),
+                                    child: Text(
+                                      usersItem.displayName,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        setState(() => FFAppState().searchuser =
-                                            'adduser');
-                                        final userFriendsCreateData =
-                                            createUserFriendsRecordData(
-                                          applicantUID: usersItem.reference,
-                                          recipientUID: currentUserReference,
-                                          statusRequest: 'pending',
-                                        );
-                                        await UserFriendsRecord.collection
-                                            .doc()
-                                            .set(userFriendsCreateData);
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MemberWidget(
-                                              passuser: FFAppState().searchuser,
-                                            ),
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      setState(() =>
+                                          FFAppState().searchuser = 'adduser');
+                                      final userFriendsCreateData =
+                                          createUserFriendsRecordData(
+                                        applicantUID: usersItem.reference,
+                                        recipientUID: currentUserReference,
+                                        statusRequest: 'Pending',
+                                      );
+                                      await UserFriendsRecord.collection
+                                          .doc()
+                                          .set(userFriendsCreateData);
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MemberWidget(
+                                            passuser: FFAppState().searchuser,
                                           ),
-                                        );
-                                      },
-                                      text: 'Add Friends',
-                                      options: FFButtonOptions(
-                                        width: 130,
-                                        height: 40,
-                                        color: Color(0xFF2364A7),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Colors.white,
-                                            ),
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
                                         ),
-                                        borderRadius: 12,
+                                      );
+                                    },
+                                    text: 'Add Friends',
+                                    options: FFButtonOptions(
+                                      width: 130,
+                                      height: 40,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Colors.white,
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
                                       ),
+                                      borderRadius: 12,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               );
                             },
                           );

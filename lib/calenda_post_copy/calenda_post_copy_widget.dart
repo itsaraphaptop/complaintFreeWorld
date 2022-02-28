@@ -134,9 +134,11 @@ class _CalendaPostCopyWidgetState extends State<CalendaPostCopyWidget>
                                 ),
                                 dateStyle: GoogleFonts.getFont(
                                   'Lexend Deca',
+                                  color: Colors.black,
                                 ),
                                 selectedDateStyle: GoogleFonts.getFont(
                                   'Lexend Deca',
+                                  color: Color(0xFF2B343A),
                                 ),
                                 inactiveDateStyle: GoogleFonts.getFont(
                                   'Lexend Deca',

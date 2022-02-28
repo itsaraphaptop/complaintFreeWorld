@@ -32,8 +32,7 @@ class _CreatePostCopyWidgetState extends State<CreatePostCopyWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 =
-        TextEditingController(text: dateTimeFormat('d/M/y', widget.dateSelect));
+    textController1 = TextEditingController(text: widget.dateSelect.toString());
     textController2 = TextEditingController();
   }
 
@@ -41,6 +40,7 @@ class _CreatePostCopyWidgetState extends State<CreatePostCopyWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -709,6 +709,7 @@ class _CreatePostCopyWidgetState extends State<CreatePostCopyWidget> {
                           userComplaint: currentUserReference,
                           complaintCheck: true,
                           createComplaint: getCurrentTimestamp,
+                          dateComment: widget.dateSelect,
                         );
                         await ComplaintJobsRecord.collection
                             .doc()
