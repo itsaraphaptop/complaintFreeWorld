@@ -105,15 +105,6 @@ class _HistoryComplaintWidgetState extends State<HistoryComplaintWidget> {
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
-                              child: Icon(
-                                Icons.search_rounded,
-                                color: Color(0xFF95A1AC),
-                                size: 24,
-                              ),
-                            ),
                             Expanded(
                               child: Padding(
                                 padding:
@@ -155,6 +146,21 @@ class _HistoryComplaintWidgetState extends State<HistoryComplaintWidget> {
                                 ),
                               ),
                             ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(4, 0, 4, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  setState(() => FFAppState().historySearch =
+                                      textController.text);
+                                },
+                                child: Icon(
+                                  Icons.search_rounded,
+                                  color: Color(0xFF95A1AC),
+                                  size: 24,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -162,188 +168,196 @@ class _HistoryComplaintWidgetState extends State<HistoryComplaintWidget> {
                   ],
                 ),
               ),
-              Expanded(
-                child: StreamBuilder<List<ComplaintJobsRecord>>(
-                  stream: queryComplaintJobsRecord(
-                    queryBuilder: (complaintJobsRecord) => complaintJobsRecord
-                        .where('userComplaint', isEqualTo: currentUserReference)
-                        .where('complaintCheck', isEqualTo: widget.chkComp),
-                  ),
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
+              if ((FFAppState().historySearch) == (textController.text))
+                Expanded(
+                  child: StreamBuilder<List<ComplaintJobsRecord>>(
+                    stream: queryComplaintJobsRecord(
+                      queryBuilder: (complaintJobsRecord) => complaintJobsRecord
+                          .where('userComplaint',
+                              isEqualTo: currentUserReference)
+                          .where('complaintCheck', isEqualTo: widget.chkComp),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                    List<ComplaintJobsRecord> columnComplaintJobsRecordList =
-                        snapshot.data;
-                    return SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children:
-                            List.generate(columnComplaintJobsRecordList.length,
-                                (columnIndex) {
-                          final columnComplaintJobsRecord =
-                              columnComplaintJobsRecordList[columnIndex];
-                          return Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 90,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10, 0, 0, 0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            if ((columnComplaintJobsRecord
-                                                    .complaintCheck) ==
-                                                true)
-                                              FaIcon(
-                                                FontAwesomeIcons.smile,
-                                                color: Color(0xFF2364A7),
-                                                size: 30,
-                                              ),
-                                            if ((columnComplaintJobsRecord
-                                                    .complaintCheck) ==
-                                                false)
-                                              FaIcon(
-                                                FontAwesomeIcons.frown,
-                                                color: Color(0xFFFF4D00),
-                                                size: 30,
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Padding(
+                        );
+                      }
+                      List<ComplaintJobsRecord> columnComplaintJobsRecordList =
+                          snapshot.data;
+                      return SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: List.generate(
+                              columnComplaintJobsRecordList.length,
+                              (columnIndex) {
+                            final columnComplaintJobsRecord =
+                                columnComplaintJobsRecordList[columnIndex];
+                            return Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 90,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  8, 1, 0, 0),
+                                                  10, 0, 0, 0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    columnComplaintJobsRecord
-                                                        .comment,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .subtitle1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFF15212B),
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    dateTimeFormat(
-                                                        'd/M/y',
-                                                        columnComplaintJobsRecord
-                                                            .createComplaint),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1
-                                                        .override(
-                                                          fontFamily:
-                                                              'Lexend Deca',
-                                                          color:
-                                                              Color(0xFFFF4D00),
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
+                                              if ((columnComplaintJobsRecord
+                                                      .complaintCheck) ==
+                                                  true)
+                                                FaIcon(
+                                                  FontAwesomeIcons.smile,
+                                                  color: Color(0xFF2364A7),
+                                                  size: 30,
+                                                ),
+                                              if ((columnComplaintJobsRecord
+                                                      .complaintCheck) ==
+                                                  false)
+                                                FaIcon(
+                                                  FontAwesomeIcons.frown,
+                                                  color: Color(0xFFFF4D00),
+                                                  size: 30,
+                                                ),
                                             ],
                                           ),
                                         ),
-                                      ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          if ((columnComplaintJobsRecord
-                                                  .complaintCheck) ==
-                                              true)
-                                            Expanded(
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 8, 0),
-                                                child: Icon(
-                                                  Icons.exposure_plus_1,
-                                                  color: Color(0xFF2364A7),
-                                                  size: 24,
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    8, 1, 0, 0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      columnComplaintJobsRecord
+                                                          .comment,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .subtitle1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Lexend Deca',
+                                                            color: Color(
+                                                                0xFF15212B),
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      dateTimeFormat(
+                                                          'd/M/y',
+                                                          columnComplaintJobsRecord
+                                                              .createComplaint),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyText1
+                                                          .override(
+                                                            fontFamily:
+                                                                'Lexend Deca',
+                                                            color: Color(
+                                                                0xFFFF4D00),
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            if ((columnComplaintJobsRecord
+                                                    .complaintCheck) ==
+                                                true)
+                                              Expanded(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(0, 0, 8, 0),
+                                                  child: Icon(
+                                                    Icons.exposure_plus_1,
+                                                    color: Color(0xFF2364A7),
+                                                    size: 24,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          if ((columnComplaintJobsRecord
-                                                  .complaintCheck) ==
-                                              false)
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0, 0, 8, 0),
-                                              child: Text(
-                                                '0',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Lexend Deca',
-                                                      color: Color(0xFFFF4D00),
-                                                      fontSize: 20,
-                                                    ),
+                                            if ((columnComplaintJobsRecord
+                                                    .complaintCheck) ==
+                                                false)
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 8, 0),
+                                                child: Text(
+                                                  '0',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'Lexend Deca',
+                                                        color:
+                                                            Color(0xFFFF4D00),
+                                                        fontSize: 20,
+                                                      ),
+                                                ),
                                               ),
-                                            ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          );
-                        }),
-                      ),
-                    );
-                  },
+                                ],
+                              ),
+                            );
+                          }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
             ],
           ),
         ],

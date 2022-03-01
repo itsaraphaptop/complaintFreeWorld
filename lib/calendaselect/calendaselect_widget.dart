@@ -208,6 +208,17 @@ class _CalendaselectWidgetState extends State<CalendaselectWidget> {
                 onPressed: () async {
                   setState(
                       () => FFAppState().calendar = calendarSelectedDay.start);
+                  final usersUpdateData = createUsersRecordData(
+                    dateEndComplaint: calendarSelectedDay.start,
+                  );
+                  await currentUserReference.update(usersUpdateData);
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          NavBarPage(initialPage: 'complaintgold'),
+                    ),
+                  );
                 },
                 text: 'เลือกวัน',
                 options: FFButtonOptions(
@@ -223,41 +234,6 @@ class _CalendaselectWidgetState extends State<CalendaselectWidget> {
                     width: 1,
                   ),
                   borderRadius: 12,
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.85, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            final usersUpdateData = createUsersRecordData(
-                              dateEndComplaint: calendarSelectedDay.start,
-                            );
-                            await currentUserReference.update(usersUpdateData);
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NavBarPage(initialPage: 'complaintgold'),
-                              ),
-                            );
-                          },
-                          child: Icon(
-                            Icons.arrow_forward,
-                            color: Colors.black,
-                            size: 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
             ],

@@ -31,6 +31,8 @@ class FFAppState {
   bool darkmode = false;
 
   DateTime dateSelect;
+
+  String historySearch = '';
 }
 
 LatLng _latLngFromString(String val) {

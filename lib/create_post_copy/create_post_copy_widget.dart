@@ -32,7 +32,8 @@ class _CreatePostCopyWidgetState extends State<CreatePostCopyWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController(text: widget.dateSelect.toString());
+    textController1 =
+        TextEditingController(text: dateTimeFormat('d/M/y', widget.dateSelect));
     textController2 = TextEditingController();
   }
 
@@ -224,36 +225,28 @@ class _CreatePostCopyWidgetState extends State<CreatePostCopyWidget> {
                             ),
                           ),
                           Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.85, 0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 80),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => NavBarPage(
-                                                  initialPage: 'complaintgold'),
-                                            ),
-                                          );
-                                        },
-                                        child: FaIcon(
-                                          FontAwesomeIcons.times,
-                                          color: Colors.black,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                            child: Align(
+                              alignment: AlignmentDirectional(0.85, 0),
+                              child: FlutterFlowIconButton(
+                                borderColor: Colors.transparent,
+                                borderRadius: 30,
+                                borderWidth: 1,
+                                buttonSize: 50,
+                                icon: FaIcon(
+                                  FontAwesomeIcons.times,
+                                  color: Colors.black,
+                                  size: 20,
                                 ),
-                              ],
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NavBarPage(
+                                          initialPage: 'complaintgold'),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ),
                         ],
