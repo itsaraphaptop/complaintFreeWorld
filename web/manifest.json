@@ -1,6 +1,6 @@
 {
-    "name": "complaintNew",
-    "short_name": "complaintNew",
+    "name": "Complaint",
+    "short_name": "Complaint",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

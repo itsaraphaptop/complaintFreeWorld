@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = complaintNew
+PRODUCT_NAME = Complaint
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = com.flutter.compaint
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 complaintNew. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2022 Complaint. All rights reserved.

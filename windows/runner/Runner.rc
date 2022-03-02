@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "complaintNew" "\0"
+            VALUE "CompanyName", "Complaint" "\0"
             VALUE "FileDescription", "A new Flutter project." "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "complaintNew" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2022 complaintNew. All rights reserved." "\0"
-            VALUE "OriginalFilename", "complaint_new.exe" "\0"
-            VALUE "ProductName", "complaintNew" "\0"
+            VALUE "InternalName", "Complaint" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2022 Complaint. All rights reserved." "\0"
+            VALUE "OriginalFilename", "complaint.exe" "\0"
+            VALUE "ProductName", "Complaint" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

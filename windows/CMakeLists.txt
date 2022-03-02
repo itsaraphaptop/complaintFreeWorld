@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
-project(complaint_new LANGUAGES CXX)
+project(complaint LANGUAGES CXX)
 
-set(BINARY_NAME "complaint_new")
+set(BINARY_NAME "complaint")
 
 cmake_policy(SET CMP0063 NEW)
 
