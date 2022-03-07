@@ -130,8 +130,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          final selectedMedia = await selectMedia(
-                            mediaSource: MediaSource.photoGallery,
+                          final selectedMedia =
+                              await selectMediaWithSourceBottomSheet(
+                            context: context,
+                            allowPhoto: true,
                           );
                           if (selectedMedia != null &&
                               validateFileFormat(

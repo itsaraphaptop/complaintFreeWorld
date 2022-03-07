@@ -50,7 +50,7 @@ class _LoginWidgetState extends State<LoginWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 70, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
